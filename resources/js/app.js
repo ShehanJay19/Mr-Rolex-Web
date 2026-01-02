@@ -83,4 +83,31 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		});
 	});
+
+	// Remove from Cart
+	document.querySelectorAll('.remove-from-cart').forEach(btn => {
+		btn.addEventListener('click', function () {
+			const name = this.dataset.productName;
+			let cart = getStorage('cart');
+			cart = cart.filter(p => p.name !== name);
+			setStorage('cart', cart);
+			updateCounts();
+			// Remove row from UI or reload for simplicity
+			const row = this.closest('tr');
+			if (row) row.remove();
+		});
+	});
+
+	// Remove from Wishlist
+	document.querySelectorAll('.remove-from-wishlist').forEach(btn => {
+		btn.addEventListener('click', function () {
+			const name = this.dataset.productName;
+			let wishlist = getStorage('wishlist');
+			wishlist = wishlist.filter(p => p.name !== name);
+			setStorage('wishlist', wishlist);
+			updateCounts();
+			const card = this.closest('.group');
+			if (card) card.remove();
+		});
+	});
 });
