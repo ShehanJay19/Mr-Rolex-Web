@@ -4,6 +4,9 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+// Cart page route
+Route::view('/cart', 'pages.cart')->name('cart');
+
 // Product detail page route
 Route::view('/product', 'pages.product')->name('product');
 
