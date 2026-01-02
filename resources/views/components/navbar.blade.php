@@ -1,4 +1,4 @@
-<nav class="bg-white border-b border-[#E5E5E5] px-6 py-3 flex items-center justify-between relative z-30" data-nav>
+<nav class="bg-canvas border-b border-border px-6 py-3 flex items-center justify-between relative z-30" data-nav>
     <!-- Left Section -->
     <div class="flex items-center gap-6 min-w-0">
         <!-- Hamburger (mobile) -->
@@ -12,14 +12,14 @@
             <li><a href="/shop?sort=new" class="hover:text-black transition">New</a></li>
         </ul>
         <!-- Category Shortcuts (desktop) -->
-        <ul class="hidden lg:flex items-center gap-2 text-xs font-semibold text-gray-500 ml-4">
+        <ul class="hidden lg:flex items-center gap-2 text-xs font-semibold text-muted ml-4">
             <li><a href="/shop?category=men" class="px-2 py-1 rounded hover:bg-gray-100">MEN</a></li>
             <li><a href="/shop?category=women" class="px-2 py-1 rounded hover:bg-gray-100">WOMEN</a></li>
             <li><a href="/shop?category=kids" class="px-2 py-1 rounded hover:bg-gray-100">KIDS</a></li>
         </ul>
         <!-- Search (desktop) -->
         <form class="hidden lg:block ml-6" action="/shop" method="GET">
-            <input type="text" name="q" placeholder="Search products..." class="px-3 py-1.5 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-black bg-gray-50" />
+            <input type="text" name="q" placeholder="Search products..." class="px-3 py-1.5 border border-border rounded-full text-sm focus:outline-none focus:border-accent bg-gray-50" />
         </form>
     </div>
 
@@ -39,11 +39,11 @@
         </a>
         <!-- Cart with flyout -->
         <div class="relative" data-mini-cart>
-            <button id="cart-toggle" class="p-2 rounded-full bg-black text-white hover:bg-[#333] relative" aria-expanded="false" aria-controls="mini-cart-panel" aria-label="Cart">
+            <button id="cart-toggle" class="p-2 rounded-full bg-accent text-white hover:bg-[#333] relative" aria-expanded="false" aria-controls="mini-cart-panel" aria-label="Cart">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 007 17h10a1 1 0 00.95-.68L19 13M7 13V6a1 1 0 011-1h5a1 1 0 011 1v7"/></svg>
                 <span id="cart-count" class="absolute -top-1 -right-1 bg-green-600 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[18px] text-center" style="font-size:11px;display:none;">0</span>
             </button>
-            <div id="mini-cart-panel" class="hidden absolute right-0 mt-3 w-[320px] bg-white border border-[#e5e5e5] rounded-xl shadow-xl overflow-hidden" role="dialog" aria-label="Mini cart">
+            <div id="mini-cart-panel" class="hidden absolute right-0 mt-3 w-[320px] bg-canvas border border-border rounded-xl shadow-xl overflow-hidden" role="dialog" aria-label="Mini cart">
                 <div class="p-4 border-b flex items-center justify-between">
                     <span class="font-semibold text-sm">Cart</span>
                     <a href="/cart" class="text-xs font-semibold underline">View all</a>
@@ -56,8 +56,8 @@
                         <span id="mini-cart-subtotal" class="font-semibold">$0</span>
                     </div>
                     <div class="flex gap-2">
-                        <a href="/cart" class="flex-1 px-3 py-2 border rounded-lg text-center text-sm font-semibold hover:bg-gray-50">View cart</a>
-                        <a href="/checkout" class="flex-1 px-3 py-2 bg-black text-white rounded-lg text-center text-sm font-semibold hover:bg-[#333]">Checkout</a>
+                        <a href="/cart" class="flex-1 px-3 py-2 border border-border rounded-lg text-center text-sm font-semibold hover:bg-gray-50">View cart</a>
+                        <a href="/checkout" class="flex-1 px-3 py-2 bg-accent text-white rounded-lg text-center text-sm font-semibold hover:bg-[#333]">Checkout</a>
                     </div>
                 </div>
             </div>
@@ -69,7 +69,7 @@
     </div>
 
     <!-- Mobile flyout menu -->
-    <div id="mobile-menu" class="hidden lg:hidden absolute left-0 top-full w-full bg-white border-b border-[#E5E5E5] shadow-lg" role="dialog" aria-label="Mobile menu">
+    <div id="mobile-menu" class="hidden lg:hidden absolute left-0 top-full w-full bg-canvas border-b border-border shadow-lg" role="dialog" aria-label="Mobile menu">
         <div class="px-4 py-3 space-y-4">
             <div class="flex items-center justify-between">
                 <span class="font-semibold">Menu</span>
