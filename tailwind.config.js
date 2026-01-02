@@ -11,8 +11,15 @@ export default {
 
     theme: {
         extend: {
+            colors: {
+                canvas: '#F7F7F5',
+                text: '#111111',
+                muted: '#6B6B6B',
+                accent: '#222222',
+                border: '#E5E5E5',
+            },
             fontFamily: {
-                sans: ['Figtree', ...defaultTheme.fontFamily.sans],
+                sans: ['Inter', ...defaultTheme.fontFamily.sans],
             },
         },
     },
