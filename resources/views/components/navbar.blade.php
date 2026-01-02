@@ -8,19 +8,10 @@
         <!-- Main Links (desktop) -->
         <ul class="hidden lg:flex items-center gap-4 text-sm font-medium">
             <li><a href="/" class="hover:text-black transition">Home</a></li>
-            <li><a href="/shop" class="hover:text-black transition">Shop</a></li>
-            <li><a href="/shop?sort=new" class="hover:text-black transition">New</a></li>
+            <li><a href="/collection" class="hover:text-black transition">Collection</a></li>
+            <li><a href="/about" class="hover:text-black transition">About</a></li>
+            <li><a href="/contact" class="hover:text-black transition">Contact</a></li>
         </ul>
-        <!-- Category Shortcuts (desktop) -->
-        <ul class="hidden lg:flex items-center gap-2 text-xs font-semibold text-muted ml-4">
-            <li><a href="/shop?category=men" class="px-2 py-1 rounded hover:bg-gray-100">MEN</a></li>
-            <li><a href="/shop?category=women" class="px-2 py-1 rounded hover:bg-gray-100">WOMEN</a></li>
-            <li><a href="/shop?category=kids" class="px-2 py-1 rounded hover:bg-gray-100">KIDS</a></li>
-        </ul>
-        <!-- Search (desktop) -->
-        <form class="hidden lg:block ml-6" action="/shop" method="GET">
-            <input type="text" name="q" placeholder="Search products..." class="px-3 py-1.5 border border-border rounded-full text-sm focus:outline-none focus:border-accent bg-gray-50" />
-        </form>
     </div>
 
     <!-- Center Section: Logo -->
@@ -32,6 +23,11 @@
 
     <!-- Right Section: Actions -->
     <div class="flex items-center gap-3 ml-auto">
+        <!-- Search (desktop, right side) -->
+        <form class="hidden lg:block" action="/shop" method="GET">
+            <label class="sr-only" for="desktop-search">Search products</label>
+            <input id="desktop-search" type="text" name="q" placeholder="Search products..." class="px-3 py-1.5 border border-border rounded-full text-sm focus:outline-none focus:border-accent bg-canvas" />
+        </form>
         <!-- Wishlist -->
         <a href="/wishlist" class="p-2 rounded-full hover:bg-gray-100 relative" aria-label="Wishlist">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>
@@ -49,7 +45,7 @@
                     <a href="/cart" class="text-xs font-semibold underline">View all</a>
                 </div>
                 <div id="mini-cart-items" class="max-h-[280px] overflow-y-auto divide-y"></div>
-                <div id="mini-cart-empty" class="p-4 text-sm text-gray-500 hidden">Your cart is empty.</div>
+                <div id="mini-cart-empty" class="p-4 text-sm text-muted hidden">Your cart is empty.</div>
                 <div class="p-4 space-y-3 border-t">
                     <div class="flex items-center justify-between text-sm">
                         <span>Subtotal</span>
@@ -79,17 +75,16 @@
             </div>
             <div class="space-y-2">
                 <a href="/" class="block px-3 py-2 rounded hover:bg-gray-50">Home</a>
-                <a href="/shop" class="block px-3 py-2 rounded hover:bg-gray-50">Shop</a>
-                <a href="/shop?sort=new" class="block px-3 py-2 rounded hover:bg-gray-50">New</a>
-                <a href="/shop?category=men" class="block px-3 py-2 rounded hover:bg-gray-50">Men</a>
-                <a href="/shop?category=women" class="block px-3 py-2 rounded hover:bg-gray-50">Women</a>
-                <a href="/shop?category=kids" class="block px-3 py-2 rounded hover:bg-gray-50">Kids</a>
+                <a href="/" class="block px-3 py-2 rounded hover:bg-gray-50">Home</a>
+                <a href="/collection" class="block px-3 py-2 rounded hover:bg-gray-50">Collection</a>
+                <a href="/about" class="block px-3 py-2 rounded hover:bg-gray-50">About</a>
+                <a href="/contact" class="block px-3 py-2 rounded hover:bg-gray-50">Contact</a>
                 <a href="/wishlist" class="block px-3 py-2 rounded hover:bg-gray-50">Wishlist</a>
                 <a href="/profile" class="block px-3 py-2 rounded hover:bg-gray-50">Profile</a>
             </div>
             <form action="/shop" method="GET" class="pt-2">
                 <label class="sr-only" for="mobile-search">Search products</label>
-                <input id="mobile-search" type="text" name="q" placeholder="Search products..." class="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:border-black bg-gray-50" />
+                <input id="mobile-search" type="text" name="q" placeholder="Search products..." class="w-full px-3 py-2 border border-border rounded-lg text-sm focus:outline-none focus:border-accent bg-canvas" />
             </form>
         </div>
     </div>

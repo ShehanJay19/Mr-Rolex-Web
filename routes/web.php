@@ -23,6 +23,11 @@ Route::view('/cart', 'pages.cart')->name('cart');
 // Product detail page route
 Route::view('/product', 'pages.product')->name('product');
 
+// Collection, About, Contact
+Route::view('/collection', 'pages.collection')->name('collection');
+Route::view('/about', 'pages.about')->name('about');
+Route::view('/contact', 'pages.contact')->name('contact');
+
 Route::get('/', function () {
     return view('pages.home');
 });
