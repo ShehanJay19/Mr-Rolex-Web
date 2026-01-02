@@ -7,6 +7,9 @@ Route::get('/', function () {
     return view('pages.home');
 });
 
+// Shop page route
+Route::view('/shop', 'pages.shop')->name('shop');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');

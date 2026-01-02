@@ -12,7 +12,7 @@
         </h1>
         <p class="mt-4 text-gray-500">Summer 2024</p>
 
-        <a href="#" class="mt-8 inline-flex items-center gap-3 border px-6 py-3 w-fit hover:bg-black hover:text-white transition">
+        <a href="/shop" class="mt-8 inline-flex items-center gap-3 border px-6 py-3 w-fit hover:bg-black hover:text-white transition">
             Go To Shop →
         </a>
     </div>
