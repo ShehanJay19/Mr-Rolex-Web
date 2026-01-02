@@ -105,7 +105,11 @@ function renderCart() {
 				</td>
 				<td class="p-4">$${item.price}</td>
 				<td class="p-4">
-					<input type="number" min="1" value="${item.quantity || 1}" class="w-16 border rounded px-2 py-1 text-center" readonly />
+					<div class="flex items-center gap-2">
+						<button class="qty-decrease px-2 py-1 border rounded" data-product-name="${item.name}">-</button>
+						<input type="number" min="1" value="${item.quantity || 1}" class="w-16 border rounded px-2 py-1 text-center" readonly />
+						<button class="qty-increase px-2 py-1 border rounded" data-product-name="${item.name}">+</button>
+					</div>
 				</td>
 				<td class="p-4 font-bold">$${total}</td>
 				<td class="p-4">
@@ -128,6 +132,35 @@ function renderCart() {
 			updateCounts();
 			renderCart();
 			showToast('Removed from cart');
+		});
+	});
+
+	// Bind quantity controls
+	tbody.querySelectorAll('.qty-decrease').forEach(btn => {
+		btn.addEventListener('click', function () {
+			const name = this.dataset.productName;
+			let cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+			const idx = cartData.findIndex(p => p.name === name);
+			if (idx > -1 && cartData[idx].quantity > 1) {
+				cartData[idx].quantity -= 1;
+				localStorage.setItem('cart', JSON.stringify(cartData));
+				updateCounts();
+				renderCart();
+			}
+		});
+	});
+
+	tbody.querySelectorAll('.qty-increase').forEach(btn => {
+		btn.addEventListener('click', function () {
+			const name = this.dataset.productName;
+			let cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+			const idx = cartData.findIndex(p => p.name === name);
+			if (idx > -1) {
+				cartData[idx].quantity = (cartData[idx].quantity || 1) + 1;
+				localStorage.setItem('cart', JSON.stringify(cartData));
+				updateCounts();
+				renderCart();
+			}
 		});
 	});
 }
