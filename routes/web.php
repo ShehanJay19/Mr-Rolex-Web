@@ -1,8 +1,12 @@
 
+
 <?php
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+// Wishlist page route
+Route::view('/wishlist', 'pages.wishlist')->name('wishlist');
 
 // Profile page route (frontend static)
 Route::view('/profile', 'pages.profile')->name('profile.front');
