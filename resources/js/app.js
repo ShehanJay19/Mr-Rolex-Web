@@ -1,35 +1,15 @@
-// --- Cart & Wishlist Count Badges ---
-function updateCounts() {
-	// Cart
-	const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-	const cartCount = cart.reduce((sum, p) => sum + (p.quantity || 1), 0);
-	const cartBadge = document.getElementById('cart-count');
-	if (cartBadge) {
-		cartBadge.textContent = cartCount;
-		cartBadge.style.display = cartCount > 0 ? 'inline-block' : 'none';
-	}
-	// Wishlist
-	const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
-	const wishlistCount = wishlist.length;
-	const wishlistBadge = document.getElementById('wishlist-count');
-	if (wishlistBadge) {
-		wishlistBadge.textContent = wishlistCount;
-		wishlistBadge.style.display = wishlistCount > 0 ? 'inline-block' : 'none';
-	}
-}
-
-document.addEventListener('DOMContentLoaded', updateCounts);
 import './bootstrap';
-
 import Alpine from 'alpinejs';
 
 window.Alpine = Alpine;
-
 Alpine.start();
 
-// --- Cart & Wishlist Count Badges ---
+// Helpers
+const getStorage = key => JSON.parse(localStorage.getItem(key) || '[]');
+const setStorage = (key, arr) => localStorage.setItem(key, JSON.stringify(arr));
+
 function updateCounts() {
-	const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+	const cart = getStorage('cart');
 	const cartCount = cart.reduce((sum, p) => sum + (p.quantity || 1), 0);
 	const cartBadge = document.getElementById('cart-count');
 	if (cartBadge) {
@@ -37,7 +17,7 @@ function updateCounts() {
 		cartBadge.style.display = cartCount > 0 ? 'inline-block' : 'none';
 	}
 
-	const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+	const wishlist = getStorage('wishlist');
 	const wishlistCount = wishlist.length;
 	const wishlistBadge = document.getElementById('wishlist-count');
 	if (wishlistBadge) {
@@ -46,27 +26,26 @@ function updateCounts() {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', updateCounts);
-
-// --- Toast helper ---
 function showToast(message) {
 	let toast = document.getElementById('toast');
 	if (!toast) {
 		toast = document.createElement('div');
 		toast.id = 'toast';
-		toast.style.position = 'fixed';
-		toast.style.left = '50%';
-		toast.style.bottom = '24px';
-		toast.style.transform = 'translateX(-50%)';
-		toast.style.background = '#111';
-		toast.style.color = '#fff';
-		toast.style.padding = '10px 16px';
-		toast.style.borderRadius = '9999px';
-		toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
-		toast.style.zIndex = '9999';
-		toast.style.fontSize = '14px';
-		toast.style.opacity = '0';
-		toast.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+		Object.assign(toast.style, {
+			position: 'fixed',
+			left: '50%',
+			bottom: '24px',
+			transform: 'translateX(-50%)',
+			background: '#111',
+			color: '#fff',
+			padding: '10px 16px',
+			borderRadius: '9999px',
+			boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
+			zIndex: '9999',
+			fontSize: '14px',
+			opacity: '0',
+			transition: 'opacity 0.2s ease, transform 0.2s ease'
+		});
 		document.body.appendChild(toast);
 	}
 	toast.textContent = message;
@@ -78,14 +57,30 @@ function showToast(message) {
 	}, 1400);
 }
 
-// --- Rendering helpers ---
+// Seed demo data once if empty
+function seedDemo() {
+	const alreadySeeded = localStorage.getItem('demoSeeded');
+	if (alreadySeeded) return;
+	const demoCart = [
+		{ name: 'Classic T-Shirt', price: 99, image: '/images/product1.jpg', description: 'Premium cotton, modern fit.', quantity: 1 },
+		{ name: 'Summer Shorts', price: 59, image: '/images/product4.jpg', description: 'Lightweight and cool.', quantity: 2 },
+	];
+	const demoWishlist = [
+		{ name: 'Modern Polo', price: 89, image: '/images/product2.jpg', description: 'Soft, stylish, and comfortable.' },
+		{ name: 'Linen Shirt', price: 109, image: '/images/product5.jpg', description: 'Breathable, elegant, timeless.' },
+	];
+	if (!getStorage('cart').length) setStorage('cart', demoCart);
+	if (!getStorage('wishlist').length) setStorage('wishlist', demoWishlist);
+	localStorage.setItem('demoSeeded', '1');
+}
+
 function renderCart() {
 	const tbody = document.getElementById('cart-items');
 	const empty = document.getElementById('cart-empty');
 	const subtotalEl = document.getElementById('cart-subtotal');
 	if (!tbody || !subtotalEl || !empty) return;
 
-	const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+	const cart = getStorage('cart');
 	tbody.innerHTML = '';
 	let subtotal = 0;
 
@@ -122,28 +117,26 @@ function renderCart() {
 
 	subtotalEl.textContent = `$${subtotal}`;
 
-	// Re-bind remove buttons after render
 	tbody.querySelectorAll('.remove-from-cart').forEach(btn => {
 		btn.addEventListener('click', function () {
 			const name = this.dataset.productName;
-			let cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+			let cartData = getStorage('cart');
 			cartData = cartData.filter(p => p.name !== name);
-			localStorage.setItem('cart', JSON.stringify(cartData));
+			setStorage('cart', cartData);
 			updateCounts();
 			renderCart();
 			showToast('Removed from cart');
 		});
 	});
 
-	// Bind quantity controls
 	tbody.querySelectorAll('.qty-decrease').forEach(btn => {
 		btn.addEventListener('click', function () {
 			const name = this.dataset.productName;
-			let cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+			let cartData = getStorage('cart');
 			const idx = cartData.findIndex(p => p.name === name);
 			if (idx > -1 && cartData[idx].quantity > 1) {
 				cartData[idx].quantity -= 1;
-				localStorage.setItem('cart', JSON.stringify(cartData));
+				setStorage('cart', cartData);
 				updateCounts();
 				renderCart();
 			}
@@ -153,11 +146,11 @@ function renderCart() {
 	tbody.querySelectorAll('.qty-increase').forEach(btn => {
 		btn.addEventListener('click', function () {
 			const name = this.dataset.productName;
-			let cartData = JSON.parse(localStorage.getItem('cart') || '[]');
+			let cartData = getStorage('cart');
 			const idx = cartData.findIndex(p => p.name === name);
 			if (idx > -1) {
 				cartData[idx].quantity = (cartData[idx].quantity || 1) + 1;
-				localStorage.setItem('cart', JSON.stringify(cartData));
+				setStorage('cart', cartData);
 				updateCounts();
 				renderCart();
 			}
@@ -170,7 +163,7 @@ function renderWishlist() {
 	const empty = document.getElementById('wishlist-empty');
 	if (!grid || !empty) return;
 
-	const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+	const wishlist = getStorage('wishlist');
 	grid.innerHTML = '';
 
 	if (wishlist.length === 0) {
@@ -205,7 +198,6 @@ function renderWishlist() {
 		});
 	}
 
-	// Bind add-to-cart inside wishlist
 	grid.querySelectorAll('.add-to-cart').forEach(btn => {
 		btn.addEventListener('click', function () {
 			const product = {
@@ -215,26 +207,25 @@ function renderWishlist() {
 				description: this.dataset.productDescription,
 				quantity: 1
 			};
-			let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+			let cart = getStorage('cart');
 			const idx = cart.findIndex(p => p.name === product.name);
 			if (idx > -1) {
 				cart[idx].quantity += 1;
 			} else {
 				cart.push(product);
 			}
-			localStorage.setItem('cart', JSON.stringify(cart));
+			setStorage('cart', cart);
 			updateCounts();
 			showToast('Added to cart');
 		});
 	});
 
-	// Bind remove-from-wishlist inside rendered cards
 	grid.querySelectorAll('.remove-from-wishlist').forEach(btn => {
 		btn.addEventListener('click', function () {
 			const name = this.dataset.productName;
-			let wishlistData = JSON.parse(localStorage.getItem('wishlist') || '[]');
+			let wishlistData = getStorage('wishlist');
 			wishlistData = wishlistData.filter(p => p.name !== name);
-			localStorage.setItem('wishlist', JSON.stringify(wishlistData));
+			setStorage('wishlist', wishlistData);
 			updateCounts();
 			renderWishlist();
 			showToast('Removed from wishlist');
@@ -242,16 +233,8 @@ function renderWishlist() {
 	});
 }
 
-// --- Add to Cart & Wishlist Interactivity ---
-document.addEventListener('DOMContentLoaded', () => {
-	function getStorage(key) {
-		return JSON.parse(localStorage.getItem(key) || '[]');
-	}
-	function setStorage(key, arr) {
-		localStorage.setItem(key, JSON.stringify(arr));
-	}
-
-	// Add to Cart buttons on product cards
+// Global add-to-cart / add-to-wishlist on product cards
+function bindGlobalAddButtons() {
 	document.querySelectorAll('.add-to-cart').forEach(btn => {
 		btn.addEventListener('click', function () {
 			const product = {
@@ -274,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		});
 	});
 
-	// Add to Wishlist buttons on product cards
 	document.querySelectorAll('.add-to-wishlist').forEach(btn => {
 		btn.addEventListener('click', function () {
 			const product = {
@@ -294,8 +276,12 @@ document.addEventListener('DOMContentLoaded', () => {
 			}
 		});
 	});
+}
 
-	// Initial render for cart and wishlist pages
+document.addEventListener('DOMContentLoaded', () => {
+	seedDemo();
+	bindGlobalAddButtons();
+	updateCounts();
 	renderCart();
 	renderWishlist();
 });
