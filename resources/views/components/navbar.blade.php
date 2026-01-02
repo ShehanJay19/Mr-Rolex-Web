@@ -35,10 +35,12 @@
         <!-- Wishlist -->
         <a href="/wishlist" class="p-2 rounded-full hover:bg-gray-100 relative">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 016.364 0L12 7.636l1.318-1.318a4.5 4.5 0 116.364 6.364L12 21.364l-7.682-7.682a4.5 4.5 0 010-6.364z"/></svg>
+            <span id="wishlist-count" class="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[18px] text-center" style="font-size:11px;display:none;">0</span>
         </a>
         <!-- Cart -->
         <a href="/cart" class="p-2 rounded-full bg-black text-white hover:bg-[#333] relative">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13l-1.35 2.7A1 1 0 007 17h10a1 1 0 00.95-.68L19 13M7 13V6a1 1 0 011-1h5a1 1 0 011 1v7"/></svg>
+            <span id="cart-count" class="absolute -top-1 -right-1 bg-green-600 text-white text-xs rounded-full px-1.5 py-0.5 min-w-[18px] text-center" style="font-size:11px;display:none;">0</span>
         </a>
         <!-- Notifications -->
         <a href="#" class="p-2 rounded-full hover:bg-gray-100 relative">

@@ -1,3 +1,24 @@
+// --- Cart & Wishlist Count Badges ---
+function updateCounts() {
+	// Cart
+	const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+	const cartCount = cart.reduce((sum, p) => sum + (p.quantity || 1), 0);
+	const cartBadge = document.getElementById('cart-count');
+	if (cartBadge) {
+		cartBadge.textContent = cartCount;
+		cartBadge.style.display = cartCount > 0 ? 'inline-block' : 'none';
+	}
+	// Wishlist
+	const wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
+	const wishlistCount = wishlist.length;
+	const wishlistBadge = document.getElementById('wishlist-count');
+	if (wishlistBadge) {
+		wishlistBadge.textContent = wishlistCount;
+		wishlistBadge.style.display = wishlistCount > 0 ? 'inline-block' : 'none';
+	}
+}
+
+document.addEventListener('DOMContentLoaded', updateCounts);
 import './bootstrap';
 
 import Alpine from 'alpinejs';
@@ -36,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
 				cart.push(product);
 			}
 			setStorage('cart', cart);
+			updateCounts();
 			// Optionally: show notification
 			alert('Added to cart!');
 		});
@@ -54,6 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 			if (!wishlist.find(p => p.name === product.name)) {
 				wishlist.push(product);
 				setStorage('wishlist', wishlist);
+				updateCounts();
 				alert('Added to wishlist!');
 			} else {
 				alert('Already in wishlist!');
