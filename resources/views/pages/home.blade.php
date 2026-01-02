@@ -3,37 +3,78 @@
 @section('content')
 
 <!-- HERO SECTION -->
-<section class="max-w-[1280px] mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10">
-    
-    <!-- Left Content -->
-    <div class="flex flex-col justify-center">
-        <h1 class="text-5xl font-extrabold leading-tight">
-            NEW <br> COLLECTION
-        </h1>
-        <p class="mt-4 text-muted">Summer 2024</p>
+<section class="max-w-[1280px] mx-auto border border-border">
 
-        <a href="/shop" class="mt-8 inline-flex items-center gap-3 border border-border px-6 py-3 w-fit hover:bg-accent hover:text-white transition">
-            Go To Shop →
-        </a>
-    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 min-h-[600px]">
 
-    <!-- Right Images -->
-    <div class="grid grid-cols-2 gap-6">
-        <img src="/images/hero1.jpg" class="w-[366px] h-[376px] object-cover border border-border" alt="" style="max-width:100%;height:auto;">
-        <img src="/images/hero2.jpg" class="w-[366px] h-[376px] object-cover border border-border" alt="" style="max-width:100%;height:auto;">
+        <!-- LEFT : TEXT CONTENT -->
+        <div class="flex flex-col justify-center
+                    px-6 py-16
+                    md:border-r md:border-border
+                    bg-white z-10">
+
+            <h1 class="text-5xl md:text-6xl font-extrabold leading-tight">
+                NEW <br> COLLECTION
+            </h1>
+
+            <p class="mt-4 text-muted text-lg">
+                Summer 2024
+            </p>
+
+            <a href="/shop"
+               class="mt-8 inline-flex items-center gap-3
+                      border border-border px-6 py-3 w-fit
+                      hover:bg-black hover:text-white transition">
+                Go To Shop →
+            </a>
+        </div>
+
+        <!-- RIGHT : IMAGE WITH OVERLAY -->
+        <div class="relative w-full h-full">
+
+            <!-- IMAGE -->
+            <img src="/images/hero_img.png"
+                 alt="Hero Image"
+                 class="absolute inset-0 w-full h-full object-cover">
+
+            <!-- GRADIENT OVERLAY -->
+            <div class="absolute inset-0
+                        bg-gradient-to-l
+                        from-black/40 via-black/20 to-transparent">
+            </div>
+
+            <!-- OVERLAY TEXT -->
+            <div class="absolute bottom-10 left-10 text-white">
+                <p class="text-sm uppercase tracking-widest">
+                    Trending
+                </p>
+                <h2 class="text-3xl font-bold">
+                    Urban Style
+                </h2>
+            </div>
+
+        </div>
+
     </div>
 
 </section>
 
 
+
 <!-- NEW THIS WEEK -->
 <section class="max-w-[1280px] mx-auto px-6 py-16">
-    
-    <div class="flex justify-between items-center mb-10">
-        <h2 class="text-3xl font-bold">
-            NEW THIS WEEK <span class="text-sm text-muted">(50)</span>
+
+    <!-- Section Header -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tight">
+            NEW THIS WEEK
+            <span class="ml-2 text-sm text-muted">(50)</span>
         </h2>
-        <span class="text-sm text-muted">View All</span>
+
+        <a href="/shop"
+           class="text-sm text-muted hover:text-black transition underline-offset-4 hover:underline">
+            View All →
+        </a>
     </div>
 
     @php
@@ -64,15 +105,17 @@
             ],
         ];
     @endphp
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
-            @foreach ($products as $product)
-                @include('components.product-card', [
-                    'image' => $product['image'],
-                    'name' => $product['name'],
-                    'description' => $product['description'],
-                    'price' => $product['price']
-                ])
-            @endforeach
+
+    <!-- Product Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8">
+        @foreach ($products as $product)
+            @include('components.product-card', [
+                'image' => $product['image'],
+                'name' => $product['name'],
+                'description' => $product['description'],
+                'price' => $product['price']
+            ])
+        @endforeach
     </div>
 
 </section>
