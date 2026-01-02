@@ -44,7 +44,7 @@
                     </td>
                     <td class="p-4 font-bold">${{ $item['price'] * $item['quantity'] }}</td>
                     <td class="p-4">
-                        <button class="text-red-500 hover:underline text-sm">Remove</button>
+                        <button class="remove-from-cart text-red-500 hover:underline text-sm" data-product-name="{{ $item['name'] }}">Remove</button>
                     </td>
                 </tr>
                 @endforeach

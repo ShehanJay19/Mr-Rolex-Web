@@ -29,7 +29,7 @@
                         'description' => $product['description'],
                         'price' => $product['price']
                     ])
-                    <button class="absolute top-4 right-4 bg-white border border-gray-200 rounded-full p-2 shadow hover:bg-red-100 transition">
+                    <button class="remove-from-wishlist absolute top-4 right-4 bg-white border border-gray-200 rounded-full p-2 shadow hover:bg-red-100 transition" data-product-name="{{ $product['name'] }}">
                         <svg class="w-5 h-5 text-red-500" fill="currentColor" viewBox="0 0 20 20"><path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/></svg>
                     </button>
                 </div>
