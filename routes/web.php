@@ -1,9 +1,13 @@
 
 
+
 <?php
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+// Order confirmation page route
+Route::view('/order-success', 'pages.order-success')->name('order.success');
 
 // Checkout page route
 Route::view('/checkout', 'pages.checkout')->name('checkout');
