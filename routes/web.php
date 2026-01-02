@@ -1,8 +1,12 @@
 
+
 <?php
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+// Checkout page route
+Route::view('/checkout', 'pages.checkout')->name('checkout');
 
 // Cart page route
 Route::view('/cart', 'pages.cart')->name('cart');
