@@ -10,17 +10,17 @@
         <h1 class="text-5xl font-extrabold leading-tight">
             NEW <br> COLLECTION
         </h1>
-        <p class="mt-4 text-gray-500">Summer 2024</p>
+        <p class="mt-4 text-muted">Summer 2024</p>
 
-        <a href="/shop" class="mt-8 inline-flex items-center gap-3 border px-6 py-3 w-fit hover:bg-black hover:text-white transition">
+        <a href="/shop" class="mt-8 inline-flex items-center gap-3 border border-border px-6 py-3 w-fit hover:bg-accent hover:text-white transition">
             Go To Shop →
         </a>
     </div>
 
     <!-- Right Images -->
     <div class="grid grid-cols-2 gap-6">
-        <img src="/images/hero1.jpg" class="w-[366px] h-[376px] object-cover border border-[#E5E5E5]" alt="" style="max-width:100%;height:auto;">
-        <img src="/images/hero2.jpg" class="w-[366px] h-[376px] object-cover border border-[#E5E5E5]" alt="" style="max-width:100%;height:auto;">
+        <img src="/images/hero1.jpg" class="w-[366px] h-[376px] object-cover border border-border" alt="" style="max-width:100%;height:auto;">
+        <img src="/images/hero2.jpg" class="w-[366px] h-[376px] object-cover border border-border" alt="" style="max-width:100%;height:auto;">
     </div>
 
 </section>
@@ -31,9 +31,9 @@
     
     <div class="flex justify-between items-center mb-10">
         <h2 class="text-3xl font-bold">
-            NEW THIS WEEK <span class="text-sm text-gray-400">(50)</span>
+            NEW THIS WEEK <span class="text-sm text-muted">(50)</span>
         </h2>
-        <span class="text-sm text-gray-400">View All</span>
+        <span class="text-sm text-muted">View All</span>
     </div>
 
     @php
@@ -84,8 +84,8 @@
     <div class="flex justify-between items-center mb-8">
         <h2 class="text-3xl font-bold">XIV COLLECTIONS 23–24</h2>
 
-        <div class="flex gap-6 text-sm text-gray-500">
-            <button class="font-semibold text-black">All</button>
+        <div class="flex gap-6 text-sm text-muted">
+            <button class="font-semibold text-text">All</button>
             <button>Men</button>
             <button>Women</button>
             <button>Kids</button>
@@ -128,7 +128,7 @@
             OUR APPROACH TO <br> FASHION DESIGN
         </h2>
 
-        <p class="text-gray-500 mb-12">
+        <p class="text-muted mb-12">
             A global vision, unique creations and a passion for detail. 
             Each design is crafted with creativity and modern aesthetics.
         </p>
