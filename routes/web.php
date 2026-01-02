@@ -1,7 +1,11 @@
+
 <?php
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+// Product detail page route
+Route::view('/product', 'pages.product')->name('product');
 
 Route::get('/', function () {
     return view('pages.home');

@@ -10,7 +10,7 @@
         </div>
         <div class="flex items-center justify-between mt-auto">
             <span class="font-bold text-lg text-[#111]">${{ $price }}</span>
-            <a href="#" class="px-4 py-2 bg-black text-white rounded hover:bg-[#333] transition text-xs font-semibold">View</a>
+            <a href="/product" class="px-4 py-2 bg-black text-white rounded hover:bg-[#333] transition text-xs font-semibold">View</a>
         </div>
     </div>
 </div>
