@@ -1,10 +1,11 @@
 
-
-
 <?php
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+// Profile page route (frontend static)
+Route::view('/profile', 'pages.profile')->name('profile.front');
 
 // Order confirmation page route
 Route::view('/order-success', 'pages.order-success')->name('order.success');

@@ -3,7 +3,7 @@
 @section('content')
 <section class="max-w-[700px] mx-auto px-6 py-16">
     <h1 class="text-4xl font-extrabold mb-10">Checkout</h1>
-    <form class="bg-white rounded-xl shadow-lg p-8 flex flex-col gap-8">
+    <form class="bg-white rounded-xl shadow-lg p-8 flex flex-col gap-8" onsubmit="event.preventDefault(); window.location.href='/order-success';">
         <div>
             <h2 class="text-lg font-bold mb-4">Shipping Information</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
