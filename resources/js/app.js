@@ -57,6 +57,30 @@ function showToast(message) {
 	}, 1400);
 }
 
+function trapFocus(container, onClose) {
+	const focusable = container.querySelectorAll('a, button, input, select, textarea, [tabindex]:not([tabindex="-1"])');
+	if (!focusable.length) return;
+	const first = focusable[0];
+	const last = focusable[focusable.length - 1];
+	function handleKey(e) {
+		if (e.key === 'Escape') {
+			onClose();
+			return;
+		}
+		if (e.key !== 'Tab') return;
+		if (e.shiftKey && document.activeElement === first) {
+			e.preventDefault();
+			last.focus();
+		} else if (!e.shiftKey && document.activeElement === last) {
+			e.preventDefault();
+			first.focus();
+		}
+	}
+	container.addEventListener('keydown', handleKey);
+	first.focus();
+	return () => container.removeEventListener('keydown', handleKey);
+}
+
 // Seed demo data once if empty
 function seedDemo() {
 	const alreadySeeded = localStorage.getItem('demoSeeded');
@@ -125,6 +149,7 @@ function renderCart() {
 			setStorage('cart', cartData);
 			updateCounts();
 			renderCart();
+			renderMiniCart();
 			showToast('Removed from cart');
 		});
 	});
@@ -139,6 +164,7 @@ function renderCart() {
 				setStorage('cart', cartData);
 				updateCounts();
 				renderCart();
+				renderMiniCart();
 			}
 		});
 	});
@@ -153,6 +179,7 @@ function renderCart() {
 				setStorage('cart', cartData);
 				updateCounts();
 				renderCart();
+				renderMiniCart();
 			}
 		});
 	});
@@ -216,6 +243,7 @@ function renderWishlist() {
 			}
 			setStorage('cart', cart);
 			updateCounts();
+			renderMiniCart();
 			showToast('Added to cart');
 		});
 	});
@@ -231,6 +259,48 @@ function renderWishlist() {
 			showToast('Removed from wishlist');
 		});
 	});
+}
+
+function renderMiniCart(opening = false) {
+	const panel = document.getElementById('mini-cart-panel');
+	const list = document.getElementById('mini-cart-items');
+	const empty = document.getElementById('mini-cart-empty');
+	const subtotalEl = document.getElementById('mini-cart-subtotal');
+	if (!panel || !list || !empty || !subtotalEl) return;
+
+	const cart = getStorage('cart');
+	list.innerHTML = '';
+	let subtotal = 0;
+
+	if (!cart.length) {
+		empty.classList.remove('hidden');
+	} else {
+		empty.classList.add('hidden');
+		cart.forEach(item => {
+			const total = (Number(item.price) || 0) * (Number(item.quantity) || 1);
+			subtotal += total;
+			const row = document.createElement('div');
+			row.className = 'p-3 flex items-center gap-3';
+			row.innerHTML = `
+				<img src="${item.image}" alt="${item.name}" class="w-12 h-12 rounded object-cover border" />
+				<div class="flex-1">
+					<p class="text-sm font-semibold leading-tight">${item.name}</p>
+					<p class="text-xs text-gray-500">Qty ${item.quantity || 1} · $${item.price}</p>
+				</div>
+				<span class="text-sm font-semibold">$${total}</span>
+			`;
+			list.appendChild(row);
+		});
+	}
+
+	subtotalEl.textContent = `$${subtotal}`;
+
+	if (opening) {
+		panel.classList.remove('hidden');
+		panel.setAttribute('aria-hidden', 'false');
+	} else {
+		panel.setAttribute('aria-hidden', panel.classList.contains('hidden') ? 'true' : 'false');
+	}
 }
 
 // Global add-to-cart / add-to-wishlist on product cards
@@ -253,6 +323,7 @@ function bindGlobalAddButtons() {
 			}
 			setStorage('cart', cart);
 			updateCounts();
+			renderMiniCart();
 			showToast('Added to cart');
 		});
 	});
@@ -284,4 +355,74 @@ document.addEventListener('DOMContentLoaded', () => {
 	updateCounts();
 	renderCart();
 	renderWishlist();
+	renderMiniCart();
+
+	// Mobile menu toggle with basic focus trap
+	const mobileToggle = document.getElementById('mobile-toggle');
+	const mobileMenu = document.getElementById('mobile-menu');
+	const mobileClose = document.getElementById('mobile-close');
+	let releaseMobileTrap = null;
+	function closeMobileMenu() {
+		if (!mobileMenu) return;
+		mobileMenu.classList.add('hidden');
+		mobileToggle?.setAttribute('aria-expanded', 'false');
+		releaseMobileTrap?.();
+		releaseMobileTrap = null;
+		mobileToggle?.focus();
+	}
+	function openMobileMenu() {
+		if (!mobileMenu) return;
+		mobileMenu.classList.remove('hidden');
+		mobileToggle?.setAttribute('aria-expanded', 'true');
+		releaseMobileTrap = trapFocus(mobileMenu, closeMobileMenu);
+	}
+	mobileToggle?.addEventListener('click', () => {
+		if (mobileMenu?.classList.contains('hidden')) {
+			openMobileMenu();
+		} else {
+			closeMobileMenu();
+		}
+	});
+	mobileClose?.addEventListener('click', closeMobileMenu);
+	mobileMenu?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMobileMenu));
+	document.addEventListener('click', e => {
+		if (!mobileMenu || mobileMenu.classList.contains('hidden')) return;
+		if (mobileMenu.contains(e.target) || mobileToggle?.contains(e.target)) return;
+		closeMobileMenu();
+	});
+	document.addEventListener('keydown', e => {
+		if (e.key === 'Escape' && mobileMenu && !mobileMenu.classList.contains('hidden')) closeMobileMenu();
+	});
+
+	// Mini-cart flyout toggle and render
+	const cartToggle = document.getElementById('cart-toggle');
+	const miniCartPanel = document.getElementById('mini-cart-panel');
+	function closeMiniCart() {
+		if (!miniCartPanel) return;
+		miniCartPanel.classList.add('hidden');
+		cartToggle?.setAttribute('aria-expanded', 'false');
+	}
+	function openMiniCart() {
+		if (!miniCartPanel) return;
+		renderMiniCart(true);
+		miniCartPanel.classList.remove('hidden');
+		cartToggle?.setAttribute('aria-expanded', 'true');
+	}
+	cartToggle?.addEventListener('click', e => {
+		e.stopPropagation();
+		if (miniCartPanel?.classList.contains('hidden')) {
+			openMiniCart();
+		} else {
+			closeMiniCart();
+		}
+	});
+	document.addEventListener('click', e => {
+		if (!miniCartPanel || miniCartPanel.classList.contains('hidden')) return;
+		if (miniCartPanel.contains(e.target) || cartToggle?.contains(e.target)) return;
+		closeMiniCart();
+	});
+	document.addEventListener('keydown', e => {
+		if (e.key === 'Escape' && miniCartPanel && !miniCartPanel.classList.contains('hidden')) closeMiniCart();
+	});
+	miniCartPanel?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMiniCart));
 });
