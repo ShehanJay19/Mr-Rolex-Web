@@ -86,6 +86,14 @@
         ];
         // Filter by category if set
         $filtered = $cat ? array_filter($products, fn($p) => $p['category'] === $cat) : $products;
+
+        // Filter by search query if set
+        $q = request('q');
+        if ($q) {
+            $filtered = array_filter($filtered, function($p) use ($q) {
+                return stripos($p['name'], $q) !== false || stripos($p['description'], $q) !== false;
+            });
+        }
     @endphp
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10">
         @foreach ($filtered as $product)
