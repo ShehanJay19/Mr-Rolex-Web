@@ -17,9 +17,24 @@
     <meta name="twitter:image" content="/images/hero1.jpg">
 
     <link rel="icon" type="image/png" href="/images/logo.jpg">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Beatrice Deck Trial';
+            src: url('/fonts/BeatriceDeck-Regular.woff2') format('woff2'),
+                 url('/fonts/BeatriceDeck-Regular.woff') format('woff');
+            font-weight: 400;
+            font-style: normal;
+            font-display: swap;
+        }
+        @font-face {
+            font-family: 'Beatrice Deck Trial';
+            src: url('/fonts/BeatriceDeck-Bold.woff2') format('woff2'),
+                 url('/fonts/BeatriceDeck-Bold.woff') format('woff');
+            font-weight: 700;
+            font-style: normal;
+            font-display: swap;
+        }
+    </style>
 
     <title>{{ config('app.name', 'Clothing Shop') }}</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -27,7 +42,7 @@
 <body class="bg-canvas text-text font-sans antialiased">
     <a href="#main-content" class="skip-link">Skip to content</a>
     <x-navbar />
-    <main id="main-content" class="max-w-[1280px] mx-auto px-4 py-20">
+    <main id="main-content" class="px-4 py-20">
         @yield('content')
     </main>
     <x-footer />

@@ -37,7 +37,7 @@
     @php
         $products = [
             [
-                'image' => '/images/product1.jpg',
+                'image' => '/images/p_img1.png',
                 'name' => 'Classic T-Shirt',
                 'description' => 'Premium cotton, modern fit.',
                 'price' => 99,

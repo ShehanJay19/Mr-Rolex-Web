@@ -4,7 +4,7 @@
 
     <!-- Image -->
     <div class="relative aspect-[3/4] w-full overflow-hidden">
-        <img src="{{ $image }}"
+        <img src="{{ is_array($image) ? $image[0] : $image }}"
              alt="{{ $name }}"
              class="w-full h-full object-cover
                     transition-transform duration-500
@@ -25,8 +25,7 @@
             title="Add to Wishlist"
             data-product-name="{{ $name }}"
             data-product-price="{{ $price }}"
-            data-product-image="{{ $image }}"
-            data-product-description="{{ $description }}"
+            data-product-image="{{ is_array($image) ? $image[0] : $image }}"
         >
             <svg class="w-4 h-4 text-red-500" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"/>
@@ -42,9 +41,10 @@
             {{ $name }}
         </h3>
 
-        <p class="text-xs text-muted mt-1 mb-4">
+        <!-- Remove description because it doesn’t exist -->
+        {{-- <p class="text-xs text-muted mt-1 mb-4">
             {{ $description }}
-        </p>
+        </p> --}}
 
         <!-- Footer -->
         <div class="mt-auto flex items-center justify-between gap-3">
@@ -69,8 +69,7 @@
                            text-xs font-semibold"
                     data-product-name="{{ $name }}"
                     data-product-price="{{ $price }}"
-                    data-product-image="{{ $image }}"
-                    data-product-description="{{ $description }}"
+                    data-product-image="{{ is_array($image) ? $image[0] : $image }}"
                 >
                     Add
                 </button>

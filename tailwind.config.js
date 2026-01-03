@@ -19,7 +19,7 @@ export default {
                 border: '#E5E5E5',
             },
             fontFamily: {
-                sans: ['Inter', ...defaultTheme.fontFamily.sans],
+                sans: ['Beatrice Deck Trial', ...defaultTheme.fontFamily.sans],
             },
         },
     },
