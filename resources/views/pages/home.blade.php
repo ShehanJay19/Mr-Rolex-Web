@@ -313,15 +313,20 @@
 
     <!-- Product Grid -->
     <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 md:gap-8">
-        @foreach ($products as $product)
-            @include('components.product-card', [
-                'image' => $product['image'][0],
+    @foreach ($products as $product)
+        <x-product-card
+            :product="[
                 'name' => $product['name'],
-                'description' => $product['type'],
-                'price' => $product['price']
-            ])
-        @endforeach
-    </div>
+                'subtitle' => $product['type'],
+                'price' => $product['price'],
+                'images' => $product['image'],
+                'url' => '/product/' . $product['id'],
+                'is_new' => true
+            ]"
+        />
+    @endforeach
+</div>
+
 
 </section>
 
