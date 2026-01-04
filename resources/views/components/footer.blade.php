@@ -19,11 +19,13 @@
                         id="newsletter-email"
                         type="email"
                         name="email"
+                        id="newsletter-email"
                         placeholder="Email address"
                         class="flex-1 px-3 py-2 border border-white/10 rounded-lg text-sm bg-white/5 text-gray-100 placeholder:text-gray-400 focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent/60 transition"
                         required
+                        aria-label="Email address"
                     >
-                    <button type="submit" class="px-4 py-2 bg-accent text-white rounded-lg text-sm font-semibold hover:bg-[#333] transition">
+                    <button type="submit" class="px-4 py-2 bg-accent text-white rounded-lg text-sm font-semibold hover:bg-[#333] transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-slate-900">
                         Join
                     </button>
                 </form>
@@ -33,74 +35,75 @@
 
         <!-- Navigation -->
         <div class="lg:col-span-5 grid grid-cols-2 sm:grid-cols-3 gap-8 text-sm text-gray-300">
-            <div class="space-y-3">
-                <p class="text-white font-semibold">Shop</p>
+            <nav class="space-y-3" aria-labelledby="footer-shop-nav">
+                <p id="footer-shop-nav" class="text-white font-semibold">Shop</p>
                 <div class="space-y-2">
-                    <a href="/collections" class="block hover:text-white">Collections</a>
-                    <a href="/new" class="block hover:text-white">New Arrivals</a>
-                    <a href="/pricing" class="block hover:text-white">Pricing</a>
-                    <a href="/gift-cards" class="block hover:text-white">Gift Cards</a>
+                    <a href="/collection" class="block hover:text-white transition-colors focus:outline-none focus:underline">Collections</a>
+                    <a href="/collection?filter=new" class="block hover:text-white transition-colors focus:outline-none focus:underline">New Arrivals</a>
+                    <a href="/shop" class="block hover:text-white transition-colors focus:outline-none focus:underline">All Products</a>
+                    <a href="/shop?category=gift" class="block hover:text-white transition-colors focus:outline-none focus:underline">Gift Cards</a>
                 </div>
-            </div>
-            <div class="space-y-3">
-                <p class="text-white font-semibold">Company</p>
+            </nav>
+            <nav class="space-y-3" aria-labelledby="footer-company-nav">
+                <p id="footer-company-nav" class="text-white font-semibold">Company</p>
                 <div class="space-y-2">
-                    <a href="/about" class="block hover:text-white">About</a>
-                    <a href="/story" class="block hover:text-white">Our Story</a>
-                    <a href="/contacts" class="block hover:text-white">Contact</a>
-                    <a href="/careers" class="block hover:text-white">Careers</a>
+                    <a href="/about" class="block hover:text-white transition-colors focus:outline-none focus:underline">About</a>
+                    <a href="/about#story" class="block hover:text-white transition-colors focus:outline-none focus:underline">Our Story</a>
+                    <a href="/contact" class="block hover:text-white transition-colors focus:outline-none focus:underline">Contact</a>
+                    <a href="/careers" class="block hover:text-white transition-colors focus:outline-none focus:underline">Careers</a>
                 </div>
-            </div>
-            <div class="space-y-3">
-                <p class="text-white font-semibold">Support</p>
+            </nav>
+            <nav class="space-y-3" aria-labelledby="footer-support-nav">
+                <p id="footer-support-nav" class="text-white font-semibold">Support</p>
                 <div class="space-y-2">
-                    <a href="/shipping" class="block hover:text-white">Shipping</a>
-                    <a href="/returns" class="block hover:text-white">Returns</a>
-                    <a href="/support" class="block hover:text-white">Help Center</a>
-                    <a href="/privacy" class="block hover:text-white">Privacy</a>
-                    <a href="/terms" class="block hover:text-white">Terms</a>
+                    <a href="/shipping" class="block hover:text-white transition-colors focus:outline-none focus:underline">Shipping</a>
+                    <a href="/returns" class="block hover:text-white transition-colors focus:outline-none focus:underline">Returns</a>
+                    <a href="/help" class="block hover:text-white transition-colors focus:outline-none focus:underline">Help Center</a>
+                    <a href="/privacy" class="block hover:text-white transition-colors focus:outline-none focus:underline">Privacy</a>
+                    <a href="/terms" class="block hover:text-white transition-colors focus:outline-none focus:underline">Terms</a>
                 </div>
-            </div>
+            </nav>
         </div>
 
         <!-- Connect & Locale -->
         <div class="lg:col-span-3 space-y-6 text-sm text-gray-300">
             <div class="space-y-3">
                 <p class="text-white font-semibold">Connect</p>
-                <div class="flex gap-3">
-                    <a href="https://www.instagram.com" class="px-3 py-2 border border-white/10 rounded-full hover:bg-white/5 transition" aria-label="Instagram">IG</a>
-                    <a href="https://www.facebook.com" class="px-3 py-2 border border-white/10 rounded-full hover:bg-white/5 transition" aria-label="Facebook">FB</a>
-                    <a href="https://www.pinterest.com" class="px-3 py-2 border border-white/10 rounded-full hover:bg-white/5 transition" aria-label="Pinterest">PT</a>
+                <div class="flex gap-3" role="group" aria-label="Social media links">
+                    <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 border border-white/10 rounded-full hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-slate-900" aria-label="Follow us on Instagram">IG</a>
+                    <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 border border-white/10 rounded-full hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-slate-900" aria-label="Follow us on Facebook">FB</a>
+                    <a href="https://www.pinterest.com" target="_blank" rel="noopener noreferrer" class="px-3 py-2 border border-white/10 rounded-full hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-slate-900" aria-label="Follow us on Pinterest">PT</a>
                 </div>
             </div>
             <div class="space-y-3">
                 <p class="text-white font-semibold">Language</p>
-                <div class="flex flex-wrap gap-2">
-                    <button type="button" class="px-3 py-2 rounded-full border border-white/10 bg-accent text-white text-xs shadow-sm">ENG</button>
-                    <button type="button" class="px-3 py-2 rounded-full border border-white/10 text-xs hover:bg-white/5 transition">ESP</button>
-                    <button type="button" class="px-3 py-2 rounded-full border border-white/10 text-xs hover:bg-white/5 transition">SWE</button>
+                <div class="flex flex-wrap gap-2" role="group" aria-label="Language selector">
+                    <button type="button" class="px-3 py-2 rounded-full border border-white/10 bg-accent text-white text-xs shadow-sm focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-slate-900" aria-pressed="true">ENG</button>
+                    <button type="button" class="px-3 py-2 rounded-full border border-white/10 text-xs hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-slate-900" aria-pressed="false">ESP</button>
+                    <button type="button" class="px-3 py-2 rounded-full border border-white/10 text-xs hover:bg-white/5 transition focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:ring-offset-slate-900" aria-pressed="false">SWE</button>
                 </div>
             </div>
             <div class="space-y-2">
                 <p class="text-white font-semibold">Payments</p>
-                <div class="flex flex-wrap gap-2">
-                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]">Visa</span>
-                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]">Mastercard</span>
-                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]">Amex</span>
-                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]">PayPal</span>
+                <div class="flex flex-wrap gap-2" role="list" aria-label="Accepted payment methods">
+                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]" role="listitem">Visa</span>
+                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]" role="listitem">Mastercard</span>
+                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]" role="listitem">Amex</span>
+                    <span class="px-3 py-2 border border-white/10 rounded-lg text-[11px]" role="listitem">PayPal</span>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="border-t border-white/10">
-        <div class="max-w-[1280px] mx-auto px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
+        <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-6 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-gray-400">
             <span>© 2026 XIV QR. All rights reserved.</span>
-            <div class="flex items-center gap-4">
-                <a href="/terms" class="hover:text-white">Terms</a>
-                <a href="/privacy" class="hover:text-white">Privacy</a>
-                <a href="/cookies" class="hover:text-white">Cookies</a>
-            </div>
+            <nav class="flex items-center gap-4" aria-label="Legal and policy links">
+                <a href="/terms" class="hover:text-white transition-colors focus:outline-none focus:underline">Terms</a>
+                <a href="/privacy" class="hover:text-white transition-colors focus:outline-none focus:underline">Privacy</a>
+                <a href="/cookies" class="hover:text-white transition-colors focus:outline-none focus:underline">Cookies</a>
+                <a href="/accessibility" class="hover:text-white transition-colors focus:outline-none focus:underline">Accessibility</a>
+            </nav>
         </div>
     </div>
 </footer>
