@@ -77,6 +77,53 @@ const observeElements = () => {
 document.addEventListener('DOMContentLoaded', observeElements);
 
 // ========================================
+// PARALLAX COLLECTION CARDS
+// ========================================
+const initParallax = () => {
+	const cards = document.querySelectorAll('[data-parallax="true"]');
+	
+	cards.forEach(card => {
+		const image = card.querySelector('[data-parallax-speed]');
+		if (!image) return;
+
+		const parallaxSpeed = parseFloat(image.dataset.parallaxSpeed) || 0.5;
+
+		card.addEventListener('mousemove', (e) => {
+			const rect = card.getBoundingClientRect();
+			const x = e.clientX - rect.left;
+			const y = e.clientY - rect.top;
+			
+			const centerX = rect.width / 2;
+			const centerY = rect.height / 2;
+			
+			const distX = (x - centerX) * parallaxSpeed;
+			const distY = (y - centerY) * parallaxSpeed;
+			
+			image.style.transform = `translate(${distX * 0.1}px, ${distY * 0.1}px) scale(1.05)`;
+		});
+
+		card.addEventListener('mouseleave', () => {
+			image.style.transform = 'translate(0, 0) scale(1)';
+		});
+
+		// Scroll parallax effect
+		window.addEventListener('scroll', () => {
+			const rect = card.getBoundingClientRect();
+			const scrollY = window.scrollY;
+			const cardTop = scrollY + rect.top;
+			const parallaxOffset = (scrollY - cardTop) * parallaxSpeed;
+			
+			// Only apply if in viewport
+			if (rect.top < window.innerHeight && rect.bottom > 0) {
+				image.style.backgroundPosition = `0 ${parallaxOffset}px`;
+			}
+		});
+	});
+};
+
+document.addEventListener('DOMContentLoaded', initParallax);
+
+// ========================================
 // STORAGE & HELPERS
 // ========================================
 const getStorage = key => JSON.parse(localStorage.getItem(key) || '[]');

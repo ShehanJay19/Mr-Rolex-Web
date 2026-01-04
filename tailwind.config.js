@@ -20,6 +20,7 @@ export default {
             },
             fontFamily: {
                 sans: ['Beatrice Deck Trial', ...defaultTheme.fontFamily.sans],
+                playfair: ['Playfair Display', 'Georgia', 'serif'],
             },
         },
     },
