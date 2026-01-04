@@ -13,9 +13,11 @@
 ])
 
 @php
-    $mainImage = !empty($product['images'])
-        ? $product['images'][0]
-        : $product['image'];
+    $mainImage = $product['images'][0] ?? $product['image'] ?? '';
+
+    if (is_array($mainImage)) {
+        $mainImage = $mainImage[0] ?? '';
+    }
 @endphp
 
 <article

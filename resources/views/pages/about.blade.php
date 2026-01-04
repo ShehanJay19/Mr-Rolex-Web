@@ -67,7 +67,7 @@
         <!-- Image -->
         <div class="relative group scroll-animate opacity-0">
             <div class="absolute inset-0 bg-gradient-to-r from-accent/20 to-transparent rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            <img src="/images/story1.jpg" 
+            <img src="/images/about_img.png" 
                  alt="Our Design Studio" 
                  class="w-full h-96 md:h-[28rem] object-cover rounded-2xl border border-border/50 shadow-xl group-hover:shadow-2xl transition-shadow duration-500 relative z-10">
         </div>
