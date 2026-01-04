@@ -30,7 +30,7 @@ Route::view('/contact', 'pages.contact')->name('contact');
 
 Route::get('/', function () {
     return view('pages.home');
-});
+})->name('home');
 
 // Shop page route
 Route::view('/shop', 'pages.shop')->name('shop');
