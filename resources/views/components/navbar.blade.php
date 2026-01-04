@@ -1,4 +1,4 @@
-<nav class="bg-canvas border-b border-border sticky top-0 z-40 backdrop-blur-sm bg-canvas/95" data-nav>
+<nav class="glass border-b border-white/20 sticky top-0 z-40 shadow-lg" data-nav>
     <div class="max-w-[1280px] mx-auto px-4 sm:px-6 py-3 flex items-center justify-between relative">
 
         <!-- LEFT -->

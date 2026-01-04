@@ -3,31 +3,37 @@
 @section('content')
 
 <!-- HERO SECTION -->
-<section class="relative max-w-[1280px] mx-auto border border-border overflow-hidden">
+<section class="relative max-w-[1280px] mx-auto border border-border overflow-hidden shadow-2xl">
     <div class="grid grid-cols-1 md:grid-cols-2 min-h-[500px] md:min-h-[600px]">
 
         <!-- LEFT : TEXT CONTENT -->
         <div class="flex flex-col justify-center px-6 sm:px-8 md:px-12 py-12 md:py-16 md:border-r md:border-border bg-white z-10 order-2 md:order-1">
             <div class="space-y-6 max-w-md">
-                <div>
+                <div class="animate-fade-in-up opacity-0 stagger-1" style="animation-fill-mode: forwards;">
                     <p class="text-xs sm:text-sm uppercase tracking-[0.2em] text-muted font-medium mb-3">Spring / Summer 2024</p>
-                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] tracking-tight">
+                    <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-[1.1] tracking-tight" style="font-family: 'Playfair Display', serif;">
                         NEW <br> COLLECTION
                     </h1>
                 </div>
-                <p class="text-base sm:text-lg text-muted leading-relaxed">
+                <p class="text-base sm:text-lg text-muted leading-relaxed animate-fade-in-up opacity-0 stagger-2" style="animation-fill-mode: forwards;">
                     Discover our latest arrivals. Premium quality, timeless design, crafted for the modern lifestyle.
                 </p>
-                <div class="flex flex-col sm:flex-row gap-3">
+                <div class="flex flex-col sm:flex-row gap-3 animate-fade-in-up opacity-0 stagger-3" style="animation-fill-mode: forwards;">
                     <a href="/shop"
-                       class="inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-3.5 hover:bg-black transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+                       class="group inline-flex items-center justify-center gap-2 bg-accent text-white px-8 py-3.5 
+                              hover:bg-black transition-all duration-300 font-semibold 
+                              focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
+                              shadow-lg hover:shadow-xl hover:scale-105 active:scale-95">
                         Explore Now
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
+                        <svg class="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
                         </svg>
                     </a>
                     <a href="/collection"
-                       class="inline-flex items-center justify-center gap-2 border-2 border-accent text-accent px-8 py-3.5 hover:bg-accent hover:text-white transition-all duration-200 font-medium focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2">
+                       class="inline-flex items-center justify-center gap-2 border-2 border-accent text-accent px-8 py-3.5 
+                              hover:bg-accent hover:text-white transition-all duration-300 font-semibold 
+                              focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2
+                              hover:shadow-lg hover:scale-105 active:scale-95">
                         View Collections
                     </a>
                 </div>
@@ -35,23 +41,26 @@
         </div>
 
         <!-- RIGHT : IMAGE WITH OVERLAY -->
-        <div class="relative w-full min-h-[400px] md:min-h-full order-1 md:order-2">
+        <div class="relative w-full min-h-[400px] md:min-h-full order-1 md:order-2 overflow-hidden">
             <img src="/images/hero_img.png"
                  alt="New Collection Spring Summer 2024"
                  loading="eager"
-                 class="absolute inset-0 w-full h-full object-cover">
+                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-[10s] hover:scale-105">
 
-            <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-black/50 via-black/20 to-transparent"></div>
+            <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-black/60 via-black/30 to-transparent"></div>
 
-            <!-- Badge -->
-            <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg">
-                <p class="text-xs font-semibold uppercase tracking-wider text-accent">New Season</p>
+            <!-- Floating Badge -->
+            <div class="absolute top-6 right-6 glass px-4 py-2 rounded-full shadow-2xl animate-scale-in opacity-0" style="animation-fill-mode: forwards; animation-delay: 0.4s;">
+                <p class="text-xs font-semibold uppercase tracking-wider text-accent flex items-center gap-2">
+                    <span class="w-2 h-2 bg-accent rounded-full animate-pulse"></span>
+                    New Season
+                </p>
             </div>
 
             <!-- Bottom Text -->
-            <div class="absolute bottom-6 left-6 text-white space-y-1">
+            <div class="absolute bottom-6 left-6 text-white space-y-1 animate-fade-in-up opacity-0" style="animation-fill-mode: forwards; animation-delay: 0.6s;">
                 <p class="text-xs uppercase tracking-[0.15em] font-medium opacity-90">Trending Now</p>
-                <h2 class="text-2xl md:text-3xl font-bold">Urban Elegance</h2>
+                <h2 class="text-2xl md:text-3xl font-bold" style="font-family: 'Playfair Display', serif;">Urban Elegance</h2>
             </div>
         </div>
 
