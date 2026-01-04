@@ -61,12 +61,18 @@
 
         <!-- Quick View Button (appears on hover) -->
         <div class="absolute inset-x-0 bottom-0 translate-y-full group-hover:translate-y-0 transition-transform duration-500 p-4">
-            <a href="{{ $product['url'] ?? '#' }}"
-               class="block w-full py-3 bg-white/95 backdrop-blur-sm text-center text-sm font-semibold
-                      rounded-lg hover:bg-black hover:text-white transition-all duration-300
-                      shadow-lg border border-white/50">
+            <button onclick="openQuickView({
+                        name: '{{ addslashes($product['name']) }}',
+                        subtitle: '{{ addslashes($product['subtitle'] ?? '') }}',
+                        price: '{{ $product['price'] }}',
+                        image: '{{ $mainImage }}',
+                        url: '{{ $product['url'] ?? '#' }}'
+                    })"
+                    class="block w-full py-3 bg-white/95 backdrop-blur-sm text-center text-sm font-semibold
+                           rounded-lg hover:bg-black hover:text-white transition-all duration-300
+                           shadow-lg border border-white/50">
                 Quick View
-            </a>
+            </button>
         </div>
     </div>
 

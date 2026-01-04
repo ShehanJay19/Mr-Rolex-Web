@@ -63,6 +63,71 @@
     </main>
     
     <x-footer />
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" 
+         class="hidden fixed inset-0 z-[100] items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+         onclick="if(event.target === this) closeQuickView()">
+        
+        <div class="modal-content relative bg-white rounded-2xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto scale-95 opacity-0 transition-all duration-300">
+            
+            <!-- Close Button -->
+            <button onclick="closeQuickView()" 
+                    class="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/90 hover:bg-white shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110"
+                    aria-label="Close quick view">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+                </svg>
+            </button>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 p-6 md:p-8">
+                
+                <!-- Left: Image -->
+                <div class="relative aspect-square w-full overflow-hidden rounded-xl bg-gray-100">
+                    <img id="qv-image" 
+                         src="" 
+                         alt="" 
+                         class="w-full h-full object-cover">
+                </div>
+
+                <!-- Right: Details -->
+                <div class="flex flex-col gap-6">
+                    <div>
+                        <h2 id="qv-name" 
+                            class="text-3xl font-bold mb-2" 
+                            style="font-family: 'Playfair Display', serif;">
+                        </h2>
+                        <p id="qv-subtitle" class="text-muted text-lg"></p>
+                    </div>
+
+                    <div class="text-4xl font-bold text-accent" style="font-family: 'Playfair Display', serif;">
+                        <span id="qv-price"></span>
+                    </div>
+
+                    <div class="border-t border-b border-border py-4 space-y-3">
+                        <p class="text-sm text-muted">Premium quality materials</p>
+                        <p class="text-sm text-muted">Free shipping on orders over $200</p>
+                        <p class="text-sm text-muted">30-day return policy</p>
+                    </div>
+
+                    <div class="flex gap-3">
+                        <button id="qv-add-to-cart"
+                                class="add-to-cart flex-1 px-6 py-4 bg-accent text-white rounded-lg font-semibold
+                                       hover:bg-black transition-all duration-300 hover:shadow-lg hover:scale-105"
+                                onclick="event.stopPropagation()">
+                            Add to Cart
+                        </button>
+                        <a id="qv-product-link"
+                           href="#"
+                           class="px-6 py-4 border-2 border-accent text-accent rounded-lg font-semibold
+                                  hover:bg-accent hover:text-white transition-all duration-300 text-center whitespace-nowrap">
+                            Full Details
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     @stack('scripts')
 </body>

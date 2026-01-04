@@ -4,7 +4,81 @@ import Alpine from 'alpinejs';
 window.Alpine = Alpine;
 Alpine.start();
 
-// Helpers
+// ========================================
+// PREMIUM QUICK VIEW MODAL
+// ========================================
+window.openQuickView = function(productData) {
+	const modal = document.getElementById('quick-view-modal');
+	if (!modal) return;
+
+	// Populate modal with product data
+	modal.querySelector('#qv-image').src = productData.image;
+	modal.querySelector('#qv-image').alt = productData.name;
+	modal.querySelector('#qv-name').textContent = productData.name;
+	modal.querySelector('#qv-subtitle').textContent = productData.subtitle || '';
+	modal.querySelector('#qv-price').textContent = `$${productData.price}`;
+	modal.querySelector('#qv-add-to-cart').dataset.productName = productData.name;
+	modal.querySelector('#qv-add-to-cart').dataset.productPrice = productData.price;
+	modal.querySelector('#qv-add-to-cart').dataset.productImage = productData.image;
+	modal.querySelector('#qv-product-link').href = productData.url || '#';
+
+	// Show modal
+	modal.classList.remove('hidden');
+	modal.classList.add('flex');
+	document.body.style.overflow = 'hidden';
+	
+	// Animate in
+	setTimeout(() => {
+		modal.querySelector('.modal-content').classList.add('scale-100', 'opacity-100');
+		modal.querySelector('.modal-content').classList.remove('scale-95', 'opacity-0');
+	}, 10);
+};
+
+window.closeQuickView = function() {
+	const modal = document.getElementById('quick-view-modal');
+	if (!modal) return;
+
+	// Animate out
+	modal.querySelector('.modal-content').classList.remove('scale-100', 'opacity-100');
+	modal.querySelector('.modal-content').classList.add('scale-95', 'opacity-0');
+	
+	setTimeout(() => {
+		modal.classList.add('hidden');
+		modal.classList.remove('flex');
+		document.body.style.overflow = '';
+	}, 200);
+};
+
+// ========================================
+// SCROLL ANIMATIONS
+// ========================================
+const observeElements = () => {
+	const elements = document.querySelectorAll('.scroll-animate');
+	
+	const observer = new IntersectionObserver((entries) => {
+		entries.forEach((entry, index) => {
+			if (entry.isIntersecting) {
+				setTimeout(() => {
+					entry.target.classList.add('animate-fade-in-up');
+					entry.target.style.animationFillMode = 'forwards';
+				}, index * 100); // Stagger delay
+				observer.unobserve(entry.target);
+			}
+		});
+	}, {
+		threshold: 0.1,
+		rootMargin: '0px 0px -50px 0px'
+	});
+
+	elements.forEach(el => observer.observe(el));
+};
+
+// Initialize on page load
+document.addEventListener('DOMContentLoaded', observeElements);
+
+// ========================================
+// STORAGE & HELPERS
+// ========================================
 const getStorage = key => JSON.parse(localStorage.getItem(key) || '[]');
 const setStorage = (key, arr) => localStorage.setItem(key, JSON.stringify(arr));
 
