@@ -49,7 +49,7 @@
     
     @stack('styles')
 </head>
-<body class="bg-canvas text-text font-sans antialiased min-h-screen flex flex-col">
+<body class="bg-white text-text font-sans antialiased min-h-screen flex flex-col" style="background-color: #f9f8f6;">
     <!-- Skip to main content link for accessibility -->
     <a href="#main-content" 
        class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-6 focus:py-3 focus:bg-accent focus:text-white focus:rounded-lg focus:shadow-lg">

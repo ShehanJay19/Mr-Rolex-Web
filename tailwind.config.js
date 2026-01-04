@@ -12,7 +12,7 @@ export default {
     theme: {
         extend: {
             colors: {
-                canvas: '#F7F7F5',
+                canvas: '#F9F8F6',
                 text: '#111111',
                 muted: '#6B6B6B',
                 accent: '#222222',
