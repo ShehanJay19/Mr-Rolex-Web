@@ -304,7 +304,7 @@
         'name' => 'Girls Mini Backpack',
         'category' => 'Kids',
         'type' => 'Accessories',
-        'price' => 260,
+        'price' => 260, 
         'image' => ['/images/p_img53.png']
     ]
 
@@ -341,9 +341,9 @@
 
     @php
         $collections = [
-            ['image' => '/images/collection1.jpg', 'title' => "Men's Collection"],
-            ['image' => '/images/collection2.jpg', 'title' => "Women's Collection"],
-            ['image' => '/images/collection3.jpg', 'title' => "Kids' Collection"],
+            ['image' => '/images/p_img2.png', 'title' => "Men's Collection"],
+            ['image' => '/images/p_img3.png', 'title' => "Women's Collection"],
+            ['image' => '/images/p_img4.png', 'title' => "Kids' Collection"],
         ];
     @endphp
 
