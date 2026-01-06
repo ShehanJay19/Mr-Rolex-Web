@@ -11,7 +11,7 @@ class StoreProductRequest extends FormRequest
      */
     public function authorize()
     {
-        return auth()->check() && auth()->user()->is_Admin();
+        return $this->user() && $this->user()->isAdmin();
     }
 
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -14,7 +16,9 @@ class CartController extends Controller
 
     public function index()
     {
-        $cart = auth()->user()->getOrCreateCart();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $cart = $user->getOrCreateCart();
         $items = $cart->items()->with('product')->get();
 
         $total = $items->sum(fn($item) => $item->product->price * $item->quantity);
@@ -30,8 +34,10 @@ class CartController extends Controller
             'size' => 'nullable|string',
         ]);
 
-        $cart = auth()->user()->getOrCreateCart();
-        $product = auth()->user()->products()->findOrFail($request->product_id);
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
+        $cart = $user->getOrCreateCart();
+        $product = Product::findOrFail($request->product_id);
 
         $cartItem = $cart->items()
             ->where('product_id', $product->id)
@@ -53,15 +59,15 @@ class CartController extends Controller
 
     public function remove($itemId)
     {
-        auth()->user()->cart->items()->findOrFail($itemId)->delete();
+        Auth::user()?->cart?->items()->findOrFail($itemId)?->delete();
         return back()->with('success', 'Removed from cart');
     }
 
     public function update(Request $request, $itemId)
     {
         $request->validate(['quantity' => 'required|integer|min:1']);
-        auth()->user()->cart->items()->findOrFail($itemId)
-            ->update(['quantity' => $request->quantity]);
+        Auth::user()?->cart?->items()->findOrFail($itemId)
+            ?->update(['quantity' => $request->quantity]);
         return back()->with('success', 'Updated!');
     }
 }
