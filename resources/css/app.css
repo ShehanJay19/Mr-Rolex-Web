@@ -1,11 +1,237 @@
-@import 'tailwindcss';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
-@source '../../storage/framework/views/*.php';
-@source '../**/*.blade.php';
-@source '../**/*.js';
+@layer base {
+	:root {
+		/* Colors */
+		--clr-bg: #f9f8f6;
+		--clr-text: #111111;
+		--clr-muted: #6b6b6b;
+		--clr-border: #e5e5e5;
+		--clr-accent: #222222;
+		
+		/* Radius */
+		--radius-sm: 0.5rem;
+		--radius-md: 0.75rem;
+		--radius-lg: 1rem;
+		--radius-xl: 1.5rem;
+		--radius-full: 9999px;
+		
+		/* Shadows */
+		--shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+		--shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+		--shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+		--shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+		--shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+		--shadow-card: 0 20px 60px rgba(0, 0, 0, 0.08);
+		
+		/* Spacing Scale */
+		--space-1: 0.25rem;
+		--space-2: 0.5rem;
+		--space-3: 0.75rem;
+		--space-4: 1rem;
+		--space-5: 1.25rem;
+		--space-6: 1.5rem;
+		--space-8: 2rem;
+		--space-10: 2.5rem;
+		--space-12: 3rem;
+		--space-16: 4rem;
+		
+		/* Transitions */
+		--transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+		--transition-base: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+		--transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+	}
 
-@theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+	* {
+		@apply border-border;
+	}
+
+	body {
+		font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+		background: var(--clr-bg);
+		color: var(--clr-text);
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+	}
+
+	/* Premium Luxury Typography */
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Playfair Display', Georgia, serif;
+		font-weight: 700;
+		letter-spacing: -0.02em;
+	}
+
+	/* Subtle texture overlay for premium feel */
+	body::before {
+		content: '';
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+		pointer-events: none;
+		z-index: 1;
+		opacity: 0.4;
+	}
+
+	/* Focus States */
+	*:focus-visible {
+		outline: 2px solid var(--clr-accent);
+		outline-offset: 2px;
+	}
+
+	/* Skip Link */
+	.skip-link,
+	.sr-only {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border-width: 0;
+	}
+
+	.skip-link:focus,
+	.sr-only:focus {
+		position: fixed;
+		top: 1rem;
+		left: 1rem;
+		z-index: 9999;
+		width: auto;
+		height: auto;
+		padding: 0.75rem 1.5rem;
+		margin: 0;
+		overflow: visible;
+		clip: auto;
+		white-space: normal;
+		background: var(--clr-accent);
+		color: #ffffff;
+		border-radius: var(--radius-lg);
+		box-shadow: var(--shadow-xl);
+		font-weight: 600;
+	}
+
+	/* Smooth Scrolling */
+	@media (prefers-reduced-motion: no-preference) {
+		html {
+			scroll-behavior: smooth;
+		}
+	}
 }
+
+@layer components {
+	/* Button Variants */
+	.btn-primary {
+		@apply px-6 py-3 bg-accent text-white rounded-full font-semibold hover:bg-black transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+	}
+
+	.btn-secondary {
+		@apply px-6 py-3 border-2 border-accent text-accent rounded-full font-semibold hover:bg-accent hover:text-white transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+	}
+
+	.btn-ghost {
+		@apply px-6 py-3 text-accent rounded-full font-semibold hover:bg-gray-100 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2;
+	}
+
+	/* Input Fields */
+	.input-field {
+		@apply w-full px-4 py-2 border border-border rounded-lg bg-white text-text placeholder-muted focus:outline-none focus:border-accent focus:ring-1 focus:ring-accent transition-colors;
+	}
+
+	/* Card Styles */
+	.card {
+		@apply bg-white border border-border rounded-xl shadow-sm overflow-hidden;
+	}
+
+	.card-hover {
+		@apply bg-white border border-border rounded-xl shadow-sm overflow-hidden transition-all duration-200 hover:shadow-md hover:border-accent/30;
+	}
+}
+
+@layer utilities {
+	/* Custom Utilities */
+	.text-balance {
+		text-wrap: balance;
+	}
+
+	.transition-base {
+		transition: all var(--transition-base);
+	}
+
+	.transition-fast {
+		transition: all var(--transition-fast);
+	}
+
+	.transition-slow {
+		transition: all var(--transition-slow);
+	}
+
+	/* Glass Morphism Effect */
+	.glass {
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: blur(20px) saturate(180%);
+		-webkit-backdrop-filter: blur(20px) saturate(180%);
+		border: 1px solid rgba(255, 255, 255, 0.5);
+	}
+
+	.glass-dark {
+		background: rgba(15, 23, 42, 0.85);
+		backdrop-filter: blur(20px) saturate(180%);
+		-webkit-backdrop-filter: blur(20px) saturate(180%);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+	}
+}
+
+/* Premium Animations */
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(30px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes scaleIn {
+	from {
+		opacity: 0;
+		transform: scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -1000px 0;
+	}
+	100% {
+		background-position: 1000px 0;
+	}
+}
+
+.animate-fade-in-up {
+	animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-scale-in {
+	animation: scaleIn 0.4s ease-out forwards;
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+.stagger-6 { animation-delay: 0.6s; }
